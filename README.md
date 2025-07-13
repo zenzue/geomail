@@ -1,5 +1,5 @@
 # **Still Developing**
-# JS won't be work in EMAIL clinets for security reason
+# JS won't be work in EMAIL clients for security reasons
 # Email Security Awareness Collector
 
 **Author:** w01f
